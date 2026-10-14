@@ -42,8 +42,10 @@ _opsa_update_prompt() {
     PROMPT="%F{cyan}%n@%m%f:%F{yellow}%~%f${git_segment}${prompt_extra} %# "
 }
 
-# Keep reloads idempotent: remove any previously registered hooks first.
-add-zsh-hook -d precmd _opsa_capture_exit 2>/dev/null || true
-add-zsh-hook -d precmd _opsa_update_prompt 2>/dev/null || true
-add-zsh-hook precmd _opsa_capture_exit
-add-zsh-hook precmd _opsa_update_prompt
+# Keep reloads idempotent. Capture must run as the first precmd hook so that
+# the previous command status is stored before any other hook can overwrite it.
+typeset -ga precmd_functions
+precmd_functions=( ${precmd_functions:#_opsa_capture_exit} )
+precmd_functions=( ${precmd_functions:#_opsa_update_prompt} )
+precmd_functions=( _opsa_capture_exit $precmd_functions )
+precmd_functions=( $precmd_functions _opsa_update_prompt )

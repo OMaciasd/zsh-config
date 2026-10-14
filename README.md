@@ -41,6 +41,7 @@ and a previous-command exit status indicator.
 ```sh
 zsh tests/check-syntax.zsh
 zsh tests/test-prompt.zsh
+zsh tests/test-integration-precmd.zsh
 ```
 
 ## Limitations
