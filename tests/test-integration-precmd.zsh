@@ -60,7 +60,7 @@ run_session() {
     local mode=$1 outfile=$2 cmdfile=$3
     local session_status
     FOREIGN_MODE="$mode" OPSA_CONFIG="$config" ZDOTDIR="$zdot" \
-        script -q -c "env ZDOTDIR=$zdot FOREIGN_MODE=$mode OPSA_CONFIG=$config zsh -i" "$outfile" \
+        script -e -q -c "env ZDOTDIR=$zdot FOREIGN_MODE=$mode OPSA_CONFIG=$config zsh -i" "$outfile" \
         <"$cmdfile" >/dev/null 2>&1
     session_status=$?
     (( session_status == 0 )) || fail "script could not run Zsh (exit status $session_status)"

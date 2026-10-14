@@ -35,6 +35,8 @@ and a previous-command exit status indicator.
 - Optional `get_git_custom_status` function. When absent, the Git segment is
   omitted silently.
 - Optional `TRIVY_PROMPT_ICON` environment variable.
+- The integration test also needs `script` (util-linux, with `-e/--return`),
+  `mktemp`, and `tr` to run an isolated interactive Zsh session.
 
 ## Tests
 
@@ -43,6 +45,10 @@ zsh tests/check-syntax.zsh
 zsh tests/test-prompt.zsh
 zsh tests/test-integration-precmd.zsh
 ```
+
+The integration test starts an isolated interactive Zsh through util-linux
+`script`; it captures the output and checks the expected markers even if the
+Zsh child exits successfully.
 
 ## Limitations
 
