@@ -1,0 +1,34 @@
+# Personal shell configuration
+.zshrc
+.zsh_history
+.zsh_sessions
+
+# Backups
+*.bak
+*.backup
+*~
+*.old
+
+# Credentials and secrets
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+known_hosts
+secrets/
+
+# Email and personal metadata
+*.eml
+
+# Trivy local modules
+trivy/
+.modules/
+
+# Editor and OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+node_modules/
+dist/
